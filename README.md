@@ -91,6 +91,22 @@ The dataset describes characteristics of cell nuclei present in digitized images
 
 ---
 
+### Advanced Feature Engineering
+
+<div align="center">
+
+| PCA (2D Projection) | Feature Importance |
+|:-:|:-:|
+| ![PCA 2D](images/pca_2d.png) | ![Feature Importance](images/feature_importance.png) |
+
+| Outlier Detection (Top 5 Features) |
+|:-:|
+| ![Boxplots](images/boxplots.png) |
+
+</div>
+
+---
+
 ## 🏆 Results
 
 ### Model Comparison Leaderboard
