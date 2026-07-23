@@ -29,6 +29,6 @@ env/
 Thumbs.db
 
 # Model artifacts
-*.pkl
+# *.pkl
 *.joblib
 *.h5

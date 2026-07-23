@@ -191,6 +191,12 @@ pip install -r requirements.txt
 jupyter notebook notebooks/breast_cancer_prediction.ipynb
 ```
 
+### Run the Web App (Streamlit)
+
+```bash
+streamlit run app.py
+```
+
 ---
 
 ## 📁 Project Structure
@@ -227,7 +233,7 @@ Breast_Cancer_Prediction_Engine/
 | **Scikit-Learn** | ML models, metrics, preprocessing |
 | **Seaborn** | Statistical data visualization |
 | **Matplotlib** | Plotting & charting |
-| **Jupyter** | Interactive development environment |
+| **Streamlit** | Web application framework |
 
 ---
 
