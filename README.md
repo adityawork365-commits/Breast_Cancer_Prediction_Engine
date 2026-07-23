@@ -239,18 +239,20 @@ Breast_Cancer_Prediction_Engine/
 
 ## 📐 Methodology
 
-```
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   Data Load  │───▶│  Preprocess  │───▶│  Train 5     │───▶│  Evaluate    │───▶│   Compare    │
-│  & Explore   │    │  & Scale     │    │  Models      │    │  Each Model  │    │  & Rank      │
-└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
-     ▼                    ▼                    ▼                    ▼                    ▼
- • Load CSV          • StandardScaler    • LogReg           • Confusion Matrix   • Leaderboard
- • Shape & info      • Stratified        • Random Forest    • Classification     • Bar chart
- • Statistics          80/20 split       • SVM                Report             • Best model
- • Pair plots        • Feature scale     • KNN              • ROC-AUC curve        selection
- • Correlation                           • Grad Boost       • PR curve
-                                                            • 5-Fold CV
+```mermaid
+graph LR
+    A[Data Load & Explore] --> B[Preprocess & Scale]
+    B --> C[Train 5 Models]
+    C --> D[Evaluate Each Model]
+    D --> E[Compare & Rank]
+    
+    subgraph Pipeline Details
+        A1[Load CSV, Shape & Info, Stats, Pair plots] -.-> A
+        B1[StandardScaler, Stratified 80/20 split] -.-> B
+        C1[LogReg, RF, SVM, KNN, GradBoost] -.-> C
+        D1[Confusion Matrix, ROC-AUC, 5-Fold CV] -.-> D
+        E1[Leaderboard, Best model selection] -.-> E
+    end
 ```
 
 ---
