@@ -10,11 +10,11 @@
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-*An end-to-end machine learning pipeline that classifies breast tumors as **benign** or **malignant** with **92.98% accuracy**, built to assist early-stage cancer diagnosis.*
+*An end-to-end machine learning pipeline that classifies breast tumors as **benign** or **malignant** with **98.25% accuracy**, comparing 5 models with comprehensive evaluation metrics.*
 
 ---
 
-[Features](#-features) · [Dataset](#-dataset) · [Results](#-results) · [Getting Started](#-getting-started) · [Project Structure](#-project-structure)
+[Features](#-features) · [Models](#-models-trained) · [Results](#-results) · [Getting Started](#-getting-started) · [Project Structure](#-project-structure)
 
 </div>
 
@@ -24,7 +24,7 @@
 
 Breast cancer is one of the most common cancers affecting women globally. Traditional diagnostic methods rely on subjective visual inspections, which can lead to diagnostic errors. Research shows that machine learning can improve diagnostic accuracy from **79.97%** (experienced physicians) to over **91%** — providing a critical second opinion for clinicians.
 
-This project builds a **binary classification model** that predicts whether a breast tumor is:
+This project builds a **binary classification system** that predicts whether a breast tumor is:
 
 | Class | Label | Description |
 |:-----:|:-----:|:------------|
@@ -36,10 +36,23 @@ This project builds a **binary classification model** that predicts whether a br
 ## ✨ Features
 
 - 🔬 **Data Exploration & Profiling** — Statistical analysis of 30 tumor characteristics
-- 📊 **Visual Analytics** — Distribution plots, correlation heatmaps, and feature analysis
-- 🧹 **Data Preprocessing** — Missing value handling, feature normalization, and train/test splitting
-- 🤖 **Logistic Regression Model** — Optimized binary classifier with interpretable coefficients
-- 📈 **Performance Evaluation** — Accuracy metrics on both training and unseen test data
+- 📊 **Visual Analytics** — Pair plots, correlation heatmaps, class distribution charts
+- 🧹 **Data Preprocessing** — Feature normalization with StandardScaler, stratified train/test splitting
+- 🤖 **5 ML Models** — Logistic Regression, Random Forest, SVM, KNN, Gradient Boosting
+- 📈 **Comprehensive Evaluation** — Confusion matrices, ROC-AUC curves, precision-recall curves, classification reports
+- 🔄 **Cross-Validation** — 5-fold stratified CV for robust performance estimation
+
+---
+
+## 🧠 Models Trained
+
+| # | Model | Type | Key Strength |
+|:-:|:------|:-----|:-------------|
+| 1 | **Logistic Regression** | Linear | Interpretable, fast, strong baseline |
+| 2 | **Random Forest** | Ensemble | Handles non-linear patterns, feature importance |
+| 3 | **Support Vector Machine** | Kernel-based | Effective in high-dimensional spaces |
+| 4 | **K-Nearest Neighbors** | Instance-based | No training phase, intuitive |
+| 5 | **Gradient Boosting** | Boosted Ensemble | Sequential error correction |
 
 ---
 
@@ -66,9 +79,13 @@ The dataset describes characteristics of cell nuclei present in digitized images
 
 <div align="center">
 
-| Raw Data Overview | Feature Distribution |
+| Class Distribution | Feature Correlation |
 |:-:|:-:|
-| ![Raw Data](images/Screenshot%202024-09-28%20085237.png) | ![Visualization](images/Visualization.png) |
+| ![Class Distribution](images/class_distribution.png) | ![Correlation](images/correlation_heatmap.png) |
+
+| Feature Pair Plot |
+|:-:|
+| ![Pair Plot](images/pairplot.png) |
 
 </div>
 
@@ -76,14 +93,57 @@ The dataset describes characteristics of cell nuclei present in digitized images
 
 ## 🏆 Results
 
-The Logistic Regression model achieves strong generalization performance:
+### Model Comparison Leaderboard
 
-| Metric | Score |
-|:-------|:-----:|
-| **Training Accuracy** | 94.73% |
-| **Test Accuracy** | **92.98%** |
+| Model | Test Accuracy | Precision | Recall | F1-Score | AUC |
+|:------|:------------:|:---------:|:------:|:--------:|:---:|
+| **🥇 Logistic Regression** | **98.25%** | 98.61% | 98.61% | 98.61% | 0.9954 |
+| **🥇 SVM** | **98.25%** | 98.61% | 98.61% | 98.61% | 0.9950 |
+| Random Forest | 95.61% | 95.89% | 97.22% | 96.55% | 0.9939 |
+| KNN | 95.61% | 95.89% | 97.22% | 96.55% | 0.9788 |
+| Gradient Boosting | 95.61% | 94.67% | 98.61% | 96.60% | 0.9907 |
 
-> The minimal gap between training and test accuracy indicates the model generalizes well to unseen data without overfitting.
+### Confusion Matrices
+
+<div align="center">
+
+![Confusion Matrices](images/confusion_matrices.png)
+
+</div>
+
+### ROC-AUC Curves
+
+<div align="center">
+
+![ROC Curves](images/roc_curves.png)
+
+</div>
+
+### Precision-Recall Curves
+
+<div align="center">
+
+![Precision-Recall](images/precision_recall_curves.png)
+
+</div>
+
+### Cross-Validation (5-Fold Stratified)
+
+<div align="center">
+
+![Cross Validation](images/cross_validation.png)
+
+</div>
+
+### Model Performance Comparison
+
+<div align="center">
+
+![Model Comparison](images/model_comparison.png)
+
+</div>
+
+> **Key Insight:** Logistic Regression and SVM achieve the highest test accuracy (98.25%) with only 1 false positive and 1 false negative each. The high recall across all models makes them suitable as computer-aided diagnostic tools where minimizing missed cancers is critical.
 
 ---
 
@@ -122,12 +182,18 @@ jupyter notebook notebooks/breast_cancer_prediction.ipynb
 ```
 Breast_Cancer_Prediction_Engine/
 ├── 📓 notebooks/
-│   └── breast_cancer_prediction.ipynb   # Full ML pipeline notebook
+│   └── breast_cancer_prediction.ipynb   # Full ML pipeline (33 cells)
 ├── 📊 data/
 │   └── data.csv                         # Wisconsin Diagnostic Dataset
 ├── 🖼️ images/
-│   ├── Screenshot 2024-09-28 085237.png # Raw data preview
-│   └── Visualization.png               # Feature distribution plots
+│   ├── class_distribution.png           # Benign vs Malignant distribution
+│   ├── correlation_heatmap.png          # Feature correlation matrix
+│   ├── pairplot.png                     # Feature pair plot
+│   ├── confusion_matrices.png           # All 5 model confusion matrices
+│   ├── roc_curves.png                   # ROC-AUC comparison
+│   ├── precision_recall_curves.png      # PR curve comparison
+│   ├── cross_validation.png             # 5-fold CV box plot
+│   └── model_comparison.png             # Final metric comparison
 ├── 📋 requirements.txt                  # Python dependencies
 ├── 📄 LICENSE                           # MIT License
 ├── 🚫 .gitignore                        # Git ignore rules
@@ -142,7 +208,7 @@ Breast_Cancer_Prediction_Engine/
 |:-----------|:--------|
 | **NumPy** | Numerical computation |
 | **Pandas** | Data manipulation & analysis |
-| **Scikit-Learn** | ML model training & evaluation |
+| **Scikit-Learn** | ML models, metrics, preprocessing |
 | **Seaborn** | Statistical data visualization |
 | **Matplotlib** | Plotting & charting |
 | **Jupyter** | Interactive development environment |
@@ -152,31 +218,28 @@ Breast_Cancer_Prediction_Engine/
 ## 📐 Methodology
 
 ```
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   Data Load  │───▶│  Preprocess  │───▶│  Train Model │───▶│   Evaluate   │
-│  & Explore   │    │  & Clean     │    │  (LogReg)    │    │  & Predict   │
-└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
-     ▼                    ▼                    ▼                    ▼
- • Load CSV          • Handle nulls      • 80/20 split       • Accuracy
- • Shape & info      • Normalize         • Fit model          metrics
- • Statistics        • Feature select    • Coefficients      • Generalization
+┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│   Data Load  │───▶│  Preprocess  │───▶│  Train 5     │───▶│  Evaluate    │───▶│   Compare    │
+│  & Explore   │    │  & Scale     │    │  Models      │    │  Each Model  │    │  & Rank      │
+└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
+     ▼                    ▼                    ▼                    ▼                    ▼
+ • Load CSV          • StandardScaler    • LogReg           • Confusion Matrix   • Leaderboard
+ • Shape & info      • Stratified        • Random Forest    • Classification     • Bar chart
+ • Statistics          80/20 split       • SVM                Report             • Best model
+ • Pair plots        • Feature scale     • KNN              • ROC-AUC curve        selection
+ • Correlation                           • Grad Boost       • PR curve
+                                                            • 5-Fold CV
 ```
-
-1. **Data Loading** — Load the Wisconsin dataset and perform exploratory data analysis
-2. **Preprocessing** — Clean data, handle missing values, normalize feature scales
-3. **Feature Engineering** — Select the most discriminative features to reduce dimensionality
-4. **Model Training** — Train a Logistic Regression classifier on 80% of the data
-5. **Evaluation** — Measure accuracy on both training and held-out test sets
 
 ---
 
 ## 🔮 Future Improvements
 
-- [ ] Add confusion matrix and classification report (precision, recall, F1)
-- [ ] Compare with other models (Random Forest, SVM, XGBoost)
-- [ ] Add ROC-AUC curve visualization
 - [ ] Build a Streamlit web app for interactive predictions
-- [ ] Implement cross-validation for more robust evaluation
+- [ ] Add PCA visualization (2D/3D)
+- [ ] Feature importance ranking with Random Forest
+- [ ] Hyperparameter tuning with GridSearchCV
+- [ ] Docker containerization & cloud deployment
 
 ---
 
